@@ -28,6 +28,12 @@ def plot(scores, mean_scores):
     plt.plot(scores, label='Pontuação', color='blue')
     plt.plot(mean_scores, label='Pontuação Média', color='orange')
     
+    # Calcula a média móvel das pontuações para a curva de aprendizado
+    window_size = 10
+    if len(scores) >= window_size:
+        moving_avg = [sum(scores[i:i+window_size])/window_size for i in range(len(scores)-window_size+1)]
+        plt.plot(range(window_size-1, len(scores)), moving_avg, label='Média Móvel', color='green')
+    
     # Define o limite mínimo do eixo y
     plt.ylim(ymin=0)
     
